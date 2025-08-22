@@ -20,12 +20,12 @@ blue = pygame.Color(0, 0, 255)
 yellow = pygame.Color(255, 255, 0)
 
 # board
-class Tile:
+'''class Tile:
     def __init__(self, x, y, width, height):
         self.rect = pygame.Rect(x, y, width, height)
     def render(self, game_win, grid_color):
         pygame.draw.rect(game_win, grid_color, self.rect)
-
+'''
 
 # init
 mines = [ [0] * grid_no for n in range(grid_no)]
@@ -64,9 +64,9 @@ for i in range(mine_no):
 pygame.init()
 game_win = pygame.display.set_mode((win_x, win_y))
 pygame.display.set_caption('Minesweeper')
-game_win.fill(black)
 
-flag[0][0]=0
+
+# flag[0][0]=0
 
 def draw_grid():
     for pos_x in range(border_side, (win_x-border_side), grid_size):
@@ -81,14 +81,36 @@ def draw_grid():
             else:
                 grid_color = green
 
-            board[x][y] = Tile(pos_x, pos_y, grid_size, grid_size)
-            board[x][y].render(game_win, grid_color)
+            board[x][y] = pygame.Rect(pos_x, pos_y, grid_size, grid_size)
+            pygame.draw.rect(game_win, grid_color, board[x][y])
 
-
-while True:
-    draw_grid()
+run = True
+game_win.fill(black)
+draw_grid()
+while run:
+    mouse_pos = pygame.mouse.get_pos()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
-            quit()
+            run = False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+
+            if event.button == 1: # rclick to open
+                for i in range(0, len(board)):
+                    for j in range(0, len(board[i])):
+                        board_rect = board[i][j]
+                        if board_rect.collidepoint(mouse_pos):
+                            # print(f"{i}, {j}")
+                            flag[i][j] = 0
+
+    game_win.fill(black)
+    draw_grid()
     pygame.display.update()
+
+pygame.quit()
+quit()
+
+'''
+TO DO:
+print numbers when tile is clicked
+check and open adjacent empty tiles
+'''
