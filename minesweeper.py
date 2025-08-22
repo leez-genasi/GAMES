@@ -63,9 +63,10 @@ for i in range(mine_no):
 
 pygame.init()
 game_win = pygame.display.set_mode((win_x, win_y))
+pygame.display.set_caption('Minesweeper')
 game_win.fill(black)
 
-# flag[0][0]=0
+flag[0][0]=0
 
 def draw_grid():
     for pos_x in range(border_side, (win_x-border_side), grid_size):
@@ -75,12 +76,14 @@ def draw_grid():
             y = (pos_y-border_up)//grid_size
             if flag[x][y] == 0:
                 grid_color = yellow
-                board[x][y] = Tile.__init__(x, y, grid_size, grid_size)
-                board[x][y].render(game_win, grid_color)
             elif (x+y)%2 == 0:
                 grid_color = blue
             else:
                 grid_color = green
+
+            board[x][y] = Tile(pos_x, pos_y, grid_size, grid_size)
+            board[x][y].render(game_win, grid_color)
+
 
 while True:
     draw_grid()
