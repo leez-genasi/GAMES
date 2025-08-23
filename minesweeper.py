@@ -18,6 +18,7 @@ red = pygame.Color(255, 0, 0)
 green = pygame.Color(0, 255, 0)
 blue = pygame.Color(0, 0, 255)
 yellow = pygame.Color(255, 255, 0)
+pink = pygame.Color(255, 0, 255)
 
 # board
 '''class Tile:
@@ -74,8 +75,10 @@ def draw_grid():
             # pygame.rect(pos_x, pos_y, size_x, size_y)
             x = (pos_x-border_side)//grid_size
             y = (pos_y-border_up)//grid_size
-            if flag[x][y] == 0:
+            if flag[x][y] == 0: # open: check adj empty cells + print number
                 grid_color = yellow
+            elif flag[x][y] == 1: # flag
+                grid_color = pink
             elif (x+y)%2 == 0:
                 grid_color = blue
             else:
@@ -94,13 +97,18 @@ while run:
             run = False
         if event.type == pygame.MOUSEBUTTONDOWN:
 
-            if event.button == 1: # rclick to open
-                for i in range(0, len(board)):
-                    for j in range(0, len(board[i])):
-                        board_rect = board[i][j]
-                        if board_rect.collidepoint(mouse_pos):
-                            # print(f"{i}, {j}")
-                            flag[i][j] = 0
+
+            for i in range(0, len(board)):
+                for j in range(0, len(board[i])):
+                    board_rect = board[i][j]
+                    if board_rect.collidepoint(mouse_pos):
+                        if event.button == 1: # lclick to open
+                            if flag[i][j] == None: flag[i][j] = 0
+                        if event.button == 3: # rclick to flag
+                            if flag[i][j] == None:
+                                flag[i][j] = 1;
+                            elif flag[i][j] == 1:
+                                flag[i][j] = None
 
     game_win.fill(black)
     draw_grid()
@@ -111,6 +119,7 @@ quit()
 
 '''
 TO DO:
-print numbers when tile is clicked
-check and open adjacent empty tiles
+[ ] print numbers when tile is clicked
+[ ] check and open adjacent empty tiles
+[o] prevent editing of flag[] once opened
 '''
