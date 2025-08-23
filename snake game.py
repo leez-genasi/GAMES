@@ -87,7 +87,6 @@ while True:
     # snake and fruit collision
     snake_body.insert(0, list(snake_pos))
 
-    print(fruit_pos)
     if snake_pos[0] == fruit_pos[0] and snake_pos[1] == fruit_pos[1]:
         score+=10
         fruit_spawn = False
@@ -113,7 +112,6 @@ while True:
     if snake_pos[1] < 0 or snake_pos[1] > (win_y-10): GameOver()
     for body in snake_body[1:]:
         if body[0] == snake_pos[0] and body[1] == snake_pos[1]: GameOver()
-
     # score
     Score(white, 'Times New Roman', 20)
 
