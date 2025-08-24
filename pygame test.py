@@ -29,7 +29,7 @@ def draw_grid():
     # grid_surface = pygame.Surface(grid_size, grid_size)
     for x in range(0, win_x, grid_size):
         for y in range(0, win_y, grid_size):
-            # pygame.rect(pos_x, pos_y, size_x, size_y)
+            # pygame.Rect(pos_x, pos_y, size_x, size_y)
             rect = pygame.Rect(x, y, grid_size, grid_size)
 
             # pygame.draw.rect(surface to draw on, color, rect to draw, border width)
