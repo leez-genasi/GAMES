@@ -113,8 +113,6 @@ def draw_grid():
                 board[x][y] = pygame.Rect(pos_x, pos_y, grid_size, grid_size)
                 pygame.draw.rect(game_win, grid_color, board[x][y])
 
-
-
 run = True
 
 def game_over():
@@ -128,7 +126,13 @@ def game_over():
     text_rect.center = bg_rect.center
     pygame.draw.rect(game_win, red, bg_rect)
 
+
+    for i in range(len(mines)):
+        for j in range(len(mines[i])):
+            if mines[i][j] == 1:
+                flag[i][j] == 0
     game_win.blit(surface, text_rect)
+
     run = False
     return run
 
@@ -195,7 +199,7 @@ TO DO:
 [0] check and open adjacent empty tiles
 [o] prevent editing of flag[] once opened
 [o] g/o condition
-[ ] g/w condition
+[ ] g/w condition (need to refine)
 
 [ ] animate mine exploding game over
 '''
