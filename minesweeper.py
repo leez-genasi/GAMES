@@ -3,11 +3,11 @@ import time
 import pygame
 import random
 
-win_x = 720
-win_y = 480
+win_x = 1080
+win_y = 720
 fps = pygame.time.Clock()
 
-grid_no = 10
+grid_no = 15
 grid_size = 40   # 400 * 400
 
 border_side = (win_x-(grid_no*grid_size))//2
@@ -64,13 +64,13 @@ for i in range(mine_no):
                     count[y+i][x+j]+=1
             break
 
-for i in range(len(mines)):
-    print(mines[i])
+# for i in range(len(mines)):
+#     print(mines[i])
 
-print()
+# print()
 
-for i in range(len(count)):
-    print(count[i])
+# for i in range(len(count)):
+#     print(count[i])
 pygame.init()
 game_win = pygame.display.set_mode((win_x, win_y))
 pygame.display.set_caption('Minesweeper')
